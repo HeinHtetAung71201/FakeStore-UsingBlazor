@@ -1,0 +1,80 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+@if (IsLoginPage())
+{
+    <div class="login-layout" style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);">
+        @Body
+    </div>
+}
+else if (IsAdminDashboard())
+{
+    <div class="admin-dashboard-layout">
+        @Body
+    </div>
+}
+else if (IsAddProduct())
+{
+    <div class="admin-dashboard-layout">
+        @Body
+    </div>
+}
+else
+{
+    <div class="page">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+
+        <!-- Main Content -->
+        <main>
+            <article class="content px-4">
+                @Body
+            </article>
+        </main>
+
+    </div>
+}
+
+<!-- Blazor Error UI -->
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
+
+@code {
+    private bool IsLoginPage()
+    {
+        var uri = NavigationManager.ToBaseRelativePath(
+            NavigationManager.Uri
+        );
+
+        return string.IsNullOrEmpty(uri)
+            || uri.Equals("/", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private bool IsAdminDashboard()
+    {
+        var uri = NavigationManager.ToBaseRelativePath(
+            NavigationManager.Uri
+        );
+
+        // Fixed: Removed string.IsNullOrEmpty(uri) so it only matches "/admin-dashboard"
+        return uri.Equals("admin-dashboard", StringComparison.OrdinalIgnoreCase)
+            || uri.Equals("/admin-dashboard", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private bool IsAddProduct()
+    {
+        var uri = NavigationManager.ToBaseRelativePath(
+            NavigationManager.Uri
+        );
+
+        // Fixed: Removed string.IsNullOrEmpty(uri) so it only matches "/add-products"
+        return uri.Equals("add-products", StringComparison.OrdinalIgnoreCase)
+            || uri.Equals("/add-products", StringComparison.OrdinalIgnoreCase);
+    }
+}

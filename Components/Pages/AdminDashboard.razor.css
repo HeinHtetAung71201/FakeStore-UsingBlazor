@@ -1,0 +1,88 @@
+.nav-bar {
+    min-height: 55px;
+}
+
+.user-profile-img {
+    width: 34px;
+    height: 34px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.status-card {
+    border: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.status-card:hover {
+    transform: translateY(-4px);
+}
+
+.userImgs {
+    align-items: center;
+}
+
+.userImgs img {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border: 2px solid white;
+    margin-left: -8px;
+}
+
+.userImgs img:first-child {
+    margin-left: 0;
+}
+
+.chartContainer {
+    width: 100%;
+}
+
+.item-card {
+    min-height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.items-img {
+    max-width: 180px;
+    max-height: 180px;
+    object-fit: contain;
+}
+
+.doughnut {
+    width: 100%;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.table th {
+    white-space: nowrap;
+}
+
+.table td {
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .item-card {
+        min-height: 250px;
+    }
+
+    .items-img {
+        max-width: 140px;
+        max-height: 140px;
+    }
+}

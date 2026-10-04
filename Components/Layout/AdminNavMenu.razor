@@ -1,0 +1,55 @@
+<div class="top-row ps-3 navbar navbar-dark ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">FakeWebStore</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable " onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav flex-column h-100">
+       <div class="d-flex flex-column h-100">
+            <div>
+                 <!-- Products / Shop -->
+        <div class="nav-item px-3 ">
+            <NavLink class="nav-link" href="/admin-dashboard" Match="NavLinkMatch.All">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <span class="bi bi-shop" aria-hidden="true"></span> 
+                    </div>
+                    <div>
+                        Dashboard
+                    </div>
+               </div>
+            </NavLink>
+        </div>
+
+        <!-- Cart -->
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/add-products">
+               <div class="d-flex align-items-center">
+                    <div>
+                        <span class="bi bi-cart" aria-hidden="true"></span> 
+                    </div>
+                    <div>
+                        Add Products
+                    </div>
+               </div>
+            </NavLink>
+        </div>
+            </div>
+
+        <!-- Logout -->
+        <div class="nav-item px-3 mt-auto mb-100 ">
+            <NavLink class="nav-link" href="logout">
+                <div class="d-flex align-items-center btn btn-danger rounded-pill w-100 text-white center justify-content-center">
+                    <div>
+                        <span class="bi bi-box-arrow-right" aria-hidden="true"></span>  
+                    </div>
+                    <div>Log out</div>
+                </div>
+            </NavLink>
+        </div>
+       </div>
+    </nav>
+</div>

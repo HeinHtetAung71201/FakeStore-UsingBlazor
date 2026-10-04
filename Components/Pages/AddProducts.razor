@@ -1,0 +1,222 @@
+@page "/add-products"
+@rendermode InteractiveServer
+
+@using FakeWebStore.Models
+@using FakeWebStore.Services
+
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject IDashboardService DashboardService
+<div class="container-fluid">
+<div class="row">
+    <div class="col-12  col-xl-2 col-lg-3 vh-100 sideBar pt-2 d-none d-lg-block" style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);">
+        <AdminNavMenu />
+    </div>
+    <div class="col-12 col-xl-10 col-lg-9 vh-100 content p-2 overflow-scroll">
+        <div class="row sticky-top ">
+                    <div class="col-12 d-flex w-100 justify-content-end">
+                        <div class="nav-bar   rounded d-flex justify-content-between align-items-center">
+            @if (isLoggedIn)
+            {
+                <div class="dropdown">
+                    <button class="btn btn-light border rounded-pill px-3"
+                            type="button"
+                            @onclick="ToggleUserMenu">
+
+                        <i class="bi bi-person-circle me-1"></i>
+
+                        <span>@username</span>
+
+                        <i class="bi bi-chevron-down ms-1"></i>
+                    </button>
+
+                    @if (showUserMenu)
+                    {
+                        <div class="position-absolute bg-white border rounded-3 shadow-sm p-2 mt-2"
+                             style="right: 0; min-width: 180px; z-index: 1100;">
+
+                            <div class="px-3 py-2 border-bottom">
+                                <small class="text-muted">Logged in as</small>
+                                <div class="fw-bold">
+                                    @username
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <a href="/"
+                   class="btn btn-outline-primary rounded-pill">
+                    <i class="bi bi-person me-1"></i>
+                    Login
+                </a>
+            }
+                            
+                        </div>
+         </div>
+        </div>
+        <div class="row">
+                   <!-- <div class="row"> -->
+                        <div class="col-12 pt-2">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/admin-dashboard">Home</a></li>
+                                @* <li class="breadcrumb-item"><a href="datalist.html">Items List</a></li> *@
+                                <li class="breadcrumb-item active" aria-current="page">Add Item</li>
+                                </ol>
+                            </nav>
+                        </div>
+                   <!-- </div> -->
+        </div>
+        <div class="row">
+                    <div class="col-12 col-lg-8 d-flex w-100 justify-content-center mx-auto">
+                        <div class=" card">
+                            <div class="card-body">
+                                 <div class="headerSection d-flex justify-content-between align-items-center">
+                                     <div class="logo d-inline-flex align-items-center">
+                                         <i class=" feather-plus-circle text-primary" style=" font-size:1.5em"></i>
+                                         <h4 class=" mb-0 ms-2">Add Items </h4>
+                                     </div>
+                                 <div>
+                                     
+                                         <i class="bi bi-plus-circle text-primary " style="font-size: 1.5em;"></i>
+                                   
+                                 </div>
+                                 </div>
+                                 <hr>
+                                <form action="">
+                                    
+                                    <div class=" form-group">
+                                         <div class="row">
+                                             <div class="col-12 col-lg-6">
+                                                <div>
+                                                     <label for="" class=" form-label text-secondary">Choose Item's Photo</label>
+                                                       <i class="feather-info text-primary" tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="focus" data-bs-content="Supported Only Images"></i>
+                                                     <input type="file" required accept="image/*" class=" form-control">
+                                                </div>
+                                                <div class="mt-2">
+                                                    <label for="" class=" form-label text-secondary">Item Name</label>
+                                                    <input type="text" class=" form-control">
+                                                </div>
+                                                <div class="mt-2">
+                                                     <label for="" class=" form-label text-secondary d-block">Type</label>
+                                                     <select name="cars" id="cars" class=" form-control form-select">
+                                                         <option selected="selected" disabled>Select Type</option>
+                                                         <option value="volvo">Food</option>
+                                                         <option value="saab">Cosmetic</option>
+                                                         <option value="mercedes">Drinks</option>
+                                                         <option value="audi">Clothes</option>
+                                                         
+                                                     </select>
+                                                 </div>
+                                                 <div class="mt-2">
+                                                     <label for="" class=" form-label text-secondary d-block">Main Category</label>
+                                                     <select name="cars" id="Category" class=" form-control form-select custom-select">
+                                                         <option selected disabled>Select Main Category</option>
+                                                         <!-- <option value="volvo">Volvo</option>
+                                                         <option value="saab">Saab</option>
+                                                         <option value="mercedes">Mercedes</option>
+                                                         <option value="audi">Audi</option> -->
+                                                        
+                                                     </select>
+                                                 </div>
+                                                 <div class="mt-2">
+                                                     <label for="" class=" form-label text-secondary d-block">Sub Category</label>
+                                                     <select name="cars" id="SubCategroy" class=" form-control form-select">
+                                                         <option selected disabled>Select Sub Category</option>
+                                                         <!-- <option value="volvo">Volvo</option>
+                                                         <option value="saab">Saab</option>
+                                                         <option value="mercedes">Mercedes</option>
+                                                         <option value="audi">Audi</option> -->
+                                                       
+                                                     </select>
+                                                 </div>
+                                                 
+                                             </div>
+                                             <div class="col-12 col-lg-6">
+                                                 <div class="row">
+                                                     <div class="col-12 col-lg-6">
+                                                         <label for="" class=" form-label text-secondary">Quantity</label>
+                                                         <input type="text " class=" form-control">
+                                                     </div>
+                                                     <div class="col-lg-6 col-12">
+                                                         <label for="" class=" form-label text-secondary">Unit</label>
+                                                         <input type="text " class=" form-control">
+                                                     </div>
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="col-12">
+                                                         <label for="" class="form-label text-secondary">Price</label>
+                                                         <input type="text " class=" form-control">
+                                                   </div>
+                                                   <div class="col-12">
+                                                     <label for="" class="form-label text-secondary">Description</label>
+
+                                                       <textarea name="" id="" cols="30" rows="8" class="form-control"></textarea>
+                                                   </div>
+                                                 </div>
+                                             </div>
+                                         
+                                         </div>
+                                    </div>
+                                   <div class="row mt-5">
+                                     <div class="footerSection">
+                                         <button class="btn btn-primary ">Add Item</button>
+                                     </div>
+                                   </div>
+                                </form>
+                               
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@code {
+      private string? username;
+    private bool isLoggedIn = false;
+    private bool showUserMenu = false;
+    
+
+    // Use OnAfterRenderAsync for JS interop (localStorage)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CheckLoginStatus();
+            
+            // Trigger a UI re-render since state changed after the initial render
+            StateHasChanged();
+        }
+    }
+
+    private async Task CheckLoginStatus()
+    {
+        try
+        {
+            username = await JS.InvokeAsync<string?>(
+                "localStorage.getItem",
+                "userName"
+            );
+            Console.WriteLine($"Retrieved username from localStorage: {username}");
+
+            isLoggedIn = !string.IsNullOrWhiteSpace(username);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Login check error: {ex.Message}");
+            isLoggedIn = false;
+            username = null;
+        }
+    }
+
+    private void ToggleUserMenu()
+    {
+        showUserMenu = !showUserMenu;
+    }
+}
